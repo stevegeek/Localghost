@@ -56,18 +56,18 @@ static SFAuthorization *authorization = nil;
         
         while (status && fgets(line, 512, status )) 
         {
-            //NSString *output = [[NSString alloc] initWithCString:line encoding:NSASCIIStringEncoding];
             NSString *output = [NSString stringWithUTF8String:line];
             NSString *find = [NSString string];
             NSScanner *scanner = [NSScanner scannerWithString:output];
             if ([scanner scanString:@"Could not open" intoString:&find])
             {
                 success = NO;
+                [find release];
                 [output release];
                 [scanner release];
                 break;
             }
-            
+            [find release];
             [output release];
             [scanner release];
         }
